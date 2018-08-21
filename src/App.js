@@ -1,10 +1,10 @@
-import React, { Component } from "react";
-import * as _ from 'lodash';
-import * as BooksAPI from "./utils/BooksAPI";
-import BooksShelf from './BooksShelf';
-import AddBook from './AddBook'
-import "./App.css";
-import { Route } from 'react-router-dom';
+import React, { Component } from "react"
+import * as _ from 'lodash'
+import * as BooksAPI from "./utils/BooksAPI"
+import BooksShelf from './components/BooksShelf'
+import AddBook from './components/AddBook'
+import { Route } from 'react-router-dom'
+import "./App.css"
 
 class App extends Component {
   state = {
@@ -26,10 +26,10 @@ class App extends Component {
   onShelfUpdate = (book, shelf) => {
     if(!book.shelf) {
       if(_.find(this.state.books, { 'title' : book.title })) {
-        return alert('This book is already on the shelf.')
+        return alert('This book is already in Shelf!')
       }
     } else if (book.shelf === shelf) {
-      return alert('This book is already on the shelf.')
+      return alert('This book is already in Shelf!')
     }
 
     BooksAPI.update(book, shelf).then((response) => {
