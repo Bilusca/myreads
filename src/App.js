@@ -3,6 +3,7 @@ import * as _ from 'lodash'
 import * as BooksAPI from "./utils/BooksAPI"
 import BooksShelf from './components/BooksShelf'
 import AddBook from './components/AddBook'
+import BookInfo from "./components/BookInfo";
 import { Route } from 'react-router-dom'
 import "./App.css"
 
@@ -33,7 +34,7 @@ class App extends Component {
     }
 
     BooksAPI.update(book, shelf).then((response) => {
-      book.shelf = shelf;
+      book.shelf = shelf
       this.setState((state) => ({
         books: state.books.filter((b) => b.id !== book.id).concat([book])
       }))
@@ -54,6 +55,7 @@ class App extends Component {
               history.push('/')
             }} />
           )} />
+          <Route path="/book/:id" render={({ match }) => (<BookInfo bookId={match.params.id} />)}/>
       </div>
     )
   }

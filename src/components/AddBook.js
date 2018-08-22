@@ -43,7 +43,11 @@ class AddBook extends Component {
         </div>
         <div className="search-books-results">
           <ol className="books-grid">
-          {books.length > 0 && books.map( book => <Book key={book.id} book={book} shelf={shelf} onShelfUpdate={onShelfUpdate} />)}
+          {books.length > 0 && books.map( book => (
+              <Link to={`/book/${book.id}`}>
+                <Book key={book.id} book={book} shelf={shelf} onShelfUpdate={onShelfUpdate} />
+              </Link>
+            ))}
           </ol>
         </div>
       </div>

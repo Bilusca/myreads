@@ -24,7 +24,11 @@ class BooksShelf extends Component {
               <div className="ookshelf-books">
                <ol className="books-grid">
                 {currentlyReadingBooks.length > 0 ? (
-                  currentlyReadingBooks.map((book, i) => <Book key={i} book={book} shelf={shelf} onShelfUpdate={onShelfUpdate} />)
+                  currentlyReadingBooks.map((book, i) => (
+                    <Link key={i} to={`/book/${book.id}`}>
+                      <Book key={book.id} book={book} shelf={shelf} onShelfUpdate={onShelfUpdate} />
+                    </Link>
+                  ))
                 ) : (
                   <div className="empty-shelf">
                     Please, add a book on this shelf.
@@ -38,7 +42,11 @@ class BooksShelf extends Component {
               <div className="ookshelf-books">
                <ol className="books-grid">
                 {wantToReadBooks.length > 0 ? (
-                  wantToReadBooks.map((book, i) => <Book key={i} book={book} shelf={shelf} onShelfUpdate={onShelfUpdate} />)
+                  wantToReadBooks.map((book, i) => (
+                    <Link key={i} to={`/book/${book.id}`}>
+                      <Book key={book.id} book={book} shelf={shelf} onShelfUpdate={onShelfUpdate} />
+                    </Link>
+                  ))
                 ): (
                   <div className="empty-shelf">
                     Please, add a book on this shelf.
@@ -52,7 +60,11 @@ class BooksShelf extends Component {
               <div className="ookshelf-books">
                <ol className="books-grid">
                 {readBooks.length > 0 ? (
-                  readBooks.map((book, i) => <Book key={i} book={book} shelf={shelf} onShelfUpdate={onShelfUpdate} />)
+                  readBooks.map((book, i) => (
+                    <Link key={i} to={`/book/${book.id}`}>
+                      <Book key={book.id} book={book} shelf={shelf} onShelfUpdate={onShelfUpdate} />
+                    </Link>
+                  ))
                 ) : (
                   <div className="empty-shelf">
                     Please, add a book on this shelf.
