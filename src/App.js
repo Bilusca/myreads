@@ -1,10 +1,12 @@
 import React, { Component } from "react"
+import { Route } from 'react-router-dom'
 import * as _ from 'lodash'
+import swal from 'sweetalert'
 import * as BooksAPI from "./utils/BooksAPI"
 import BooksShelf from './components/BooksShelf'
 import AddBook from './components/AddBook'
-import BookInfo from "./components/BookInfo";
-import { Route } from 'react-router-dom'
+import BookInfo from "./components/BookInfo"
+import Loading from "./components/Loading"
 import "./App.css"
 
 class App extends Component {
@@ -15,47 +17,61 @@ class App extends Component {
       {id: 'wantToRead', value: 'Want to Read'},
       {id: 'read', value: 'Read'},
       {id: 'none', value: 'None'}
-    ]
-  };
+    ],
+    show: false
+  }
 
   componentDidMount() {
     BooksAPI.getAll().then(res => {
       this.setState({ books: res });
-    });
+    })
+  }
+
+  showLoading(show) {
+    this.setState({ show })
   }
 
   onShelfUpdate = (book, shelf) => {
+    this.showLoading(true)
+
     if(!book.shelf) {
       if(_.find(this.state.books, { 'title' : book.title })) {
-        return alert('This book is already in Shelf!')
+        this.showLoading(false)
+        return swal('Oh no!','This book is already in Shelf!', 'warning')
       }
     } else if (book.shelf === shelf) {
-      return alert('This book is already in Shelf!')
+      this.showLoading(false)
+      return swal('Oh no!','This book is already in Shelf!', 'warning')
     }
 
     BooksAPI.update(book, shelf).then((response) => {
       book.shelf = shelf
       this.setState((state) => ({
-        books: state.books.filter((b) => b.id !== book.id).concat([book])
+        books: state.books.filter((b) => b.id !== book.id).concat([book]),
+        show: false
       }))
+      if(shelf === 'none') {
+        return swal('Success!','Book removed from shelf.', 'success')
+      }
+
+      return swal('Success!','Book moved to shelf!', 'success')
     })
   }
 
   render() {
-    const { books, shelf } = this.state;
+    const { books, shelf, show } = this.state;
 
     return (
       <div className="app">
           <Route exact path="/" render={() => (
             <BooksShelf books={books} onShelfUpdate={this.onShelfUpdate} shelf={shelf}/>
           )} />
-          <Route path="/add" render={({history}) => (
-            <AddBook shelf={shelf} onShelfUpdate={(book, shelf) => {
-              this.onShelfUpdate(book, shelf);
-              history.push('/')
-            }} />
+          <Route path="/add" render={() => (
+            <AddBook shelf={shelf} showLoading={this.showLoading} onShelfUpdate={(book, shelf) => this.onShelfUpdate(book, shelf) } />
           )} />
           <Route path="/book/:id" render={({ match }) => (<BookInfo bookId={match.params.id} />)}/>
+
+          <Loading show={show} />
       </div>
     )
   }

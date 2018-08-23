@@ -1,13 +1,22 @@
-import React from 'react';
-import BookCover from './BookCover';
+import React from 'react'
+import BookCover from './BookCover'
+import { Link } from 'react-router-dom'
 
 
 const Book = ({ book, shelf, onShelfUpdate }) => {
   let bookImage;
   if(book.hasOwnProperty('imageLinks')) {
-    bookImage = <BookCover bookId={book.id} image={book.imageLinks.smallThumbnail} />
+    bookImage = (
+      <Link to={`/book/${book.id}`}>
+        <BookCover bookId={book.id} image={book.imageLinks.smallThumbnail} />
+      </Link>
+    )
   } else {
-    bookImage = <BookCover bookId={book.id} image="img/no-image-available.jpg" />
+    bookImage = (
+      <Link to={`/book/${book.id}`}>
+        <BookCover bookId={book.id} image="img/no-image-available.jpg" />
+      </Link>
+    )
   }
 
   return (

@@ -24,10 +24,8 @@ class BooksShelf extends Component {
               <div className="ookshelf-books">
                <ol className="books-grid">
                 {currentlyReadingBooks.length > 0 ? (
-                  currentlyReadingBooks.map((book, i) => (
-                    <Link key={i} to={`/book/${book.id}`}>
-                      <Book key={book.id} book={book} shelf={shelf} onShelfUpdate={onShelfUpdate} />
-                    </Link>
+                  currentlyReadingBooks.map((book) => (
+                    <Book key={book.id} book={book} shelf={shelf} onShelfUpdate={onShelfUpdate} />
                   ))
                 ) : (
                   <div className="empty-shelf">
@@ -42,10 +40,8 @@ class BooksShelf extends Component {
               <div className="ookshelf-books">
                <ol className="books-grid">
                 {wantToReadBooks.length > 0 ? (
-                  wantToReadBooks.map((book, i) => (
-                    <Link key={i} to={`/book/${book.id}`}>
-                      <Book key={book.id} book={book} shelf={shelf} onShelfUpdate={onShelfUpdate} />
-                    </Link>
+                  wantToReadBooks.map((book) => (
+                    <Book key={book.id} book={book} shelf={shelf} onShelfUpdate={onShelfUpdate} />
                   ))
                 ): (
                   <div className="empty-shelf">
@@ -60,10 +56,8 @@ class BooksShelf extends Component {
               <div className="ookshelf-books">
                <ol className="books-grid">
                 {readBooks.length > 0 ? (
-                  readBooks.map((book, i) => (
-                    <Link key={i} to={`/book/${book.id}`}>
-                      <Book key={book.id} book={book} shelf={shelf} onShelfUpdate={onShelfUpdate} />
-                    </Link>
+                  readBooks.map((book) => (
+                    <Book key={book.id} book={book} shelf={shelf} onShelfUpdate={onShelfUpdate} />
                   ))
                 ) : (
                   <div className="empty-shelf">
@@ -79,6 +73,7 @@ class BooksShelf extends Component {
         <div className="open-search">
           <Link to="/add">Add a book</Link>
         </div>
+
       </div>
     )
   }

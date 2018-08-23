@@ -15,10 +15,12 @@ class AddBook extends Component {
     this.updateQuery.cancel();
   }
 
+  showLoading = this.props.showLoading
+
   updateQuery = _.debounce((query) => {
     if (!query) return
 
-    this.setState({ query });
+    this.setState({ query })
     BooksAPI.search(this.state.query).then( (books) => {
       if (books.hasOwnProperty('error')) {
         this.setState({ books: books.items })
@@ -43,11 +45,7 @@ class AddBook extends Component {
         </div>
         <div className="search-books-results">
           <ol className="books-grid">
-          {books.length > 0 && books.map( book => (
-              <Link to={`/book/${book.id}`}>
-                <Book key={book.id} book={book} shelf={shelf} onShelfUpdate={onShelfUpdate} />
-              </Link>
-            ))}
+            {books.length > 0 && books.map( book => <Book key={book.id} book={book} shelf={shelf} onShelfUpdate={onShelfUpdate} /> )}
           </ol>
         </div>
       </div>
