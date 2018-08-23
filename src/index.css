@@ -200,11 +200,38 @@ body, .app {
   font-weight: bold;
 }
 
-.modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width:100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.6);
+.empty-search {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 550px;
+}
+
+.empty-search h1 {
+  font-size: 2.8em;
+  color: #999;
+}
+
+.book-info-header {
+  display: flex;
+  justify-content: flex-start;
+  align-content: space-between;
+  padding: 5px 0;
+  border-bottom: 2px solid #2e7c31;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 0 6px rgba(0,0,0,0.23)
+}
+
+.book-info-header h1 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  color: #2e7c31;
+}
+
+.container-book {
+  padding: 20px;
+  width: 70%;
+  display: flex;
+  margin: 0 auto;
 }

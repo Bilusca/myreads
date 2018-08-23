@@ -4,35 +4,43 @@ import * as _ from 'lodash';
 import { Link } from 'react-router-dom';
 
 import Book from './Book';
+import Loading from './Loading'
 
 class AddBook extends Component {
   state = {
     query: '',
-    books: []
+    books: [],
+    showLoading: false,
+    message: 'Please, search a book.'
   }
 
   componentWillUnmount() {
     this.updateQuery.cancel();
   }
 
-  showLoading = this.props.showLoading
+  showLoading = (showLoading) => {
+    this.setState({ showLoading })
+  }
 
   updateQuery = _.debounce((query) => {
     if (!query) return
 
+    this.showLoading(true)
     this.setState({ query })
     BooksAPI.search(this.state.query).then( (books) => {
       if (books.hasOwnProperty('error')) {
-        this.setState({ books: books.items })
+        this.setState({ books: books.items, message: 'No matchs found.' })
+        this.showLoading(false)
       } else {
-        this.setState({ books })
+        this.setState({ books, message: 'Please, search a book.' })
+        this.showLoading(false)
       }
     })
   }, 500)
 
   render() {
     const { shelf, onShelfUpdate } = this.props
-    const { books } = this.state
+    const { books, showLoading, message } = this.state
     return (
       <div className="search-books">
         <div className="search-books-bar">
@@ -44,10 +52,19 @@ class AddBook extends Component {
           </div>
         </div>
         <div className="search-books-results">
-          <ol className="books-grid">
-            {books.length > 0 && books.map( book => <Book key={book.id} book={book} shelf={shelf} onShelfUpdate={onShelfUpdate} /> )}
+          {books.length > 0 ? (
+            <ol className="books-grid">
+            {books.map( book => <Book key={book.id} book={book} shelf={shelf} onShelfUpdate={onShelfUpdate} /> )}
           </ol>
+          ) : (
+            <div className="empty-search">
+              <h1>{message}</h1>
+            </div>
+          )}
+
         </div>
+
+        <Loading show={showLoading} />
       </div>
     )
   }
