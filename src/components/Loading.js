@@ -1,4 +1,5 @@
 import React from 'react'
+import loadingGif from '../img/loading.gif'
 
 const Loading = ({ show }) => {
   const styles = {
@@ -16,7 +17,7 @@ const Loading = ({ show }) => {
 
   return (
     <div style={styles}>
-      <img src="img/loading.gif" alt="Loading GIF" />
+      <img src={loadingGif} alt="Loading GIF" />
     </div>
   )
 }

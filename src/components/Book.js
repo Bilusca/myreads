@@ -1,6 +1,7 @@
 import React from 'react'
 import BookCover from './BookCover'
 import { Link } from 'react-router-dom'
+import noImageFound from '../img/no-image-available.jpg'
 
 
 const Book = ({ book, shelf, onShelfUpdate }) => {
@@ -14,7 +15,7 @@ const Book = ({ book, shelf, onShelfUpdate }) => {
   } else {
     bookImage = (
       <Link to={`/book/${book.id}`}>
-        <BookCover bookId={book.id} image="img/no-image-available.jpg" />
+        <BookCover bookId={book.id} image={noImageFound} />
       </Link>
     )
   }
