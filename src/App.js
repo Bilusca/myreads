@@ -22,8 +22,9 @@ class App extends Component {
   }
 
   componentDidMount() {
+    this.showLoading(true)
     BooksAPI.getAll().then(res => {
-      this.setState({ books: res });
+      this.setState({ books: res, show: false })
     })
   }
 
@@ -69,7 +70,7 @@ class App extends Component {
           <Route path="/add" render={() => (
             <AddBook shelf={shelf} showLoading={this.showLoading} onShelfUpdate={(book, shelf) => this.onShelfUpdate(book, shelf) } />
           )} />
-          <Route path="/book/:id" render={({ match }) => (<BookInfo bookId={match.params.id} />)}/>
+          <Route path="/book/:id" render={({ match, history }) => (<BookInfo history={history} bookId={match.params.id} />)}/>
 
           <Loading show={show} />
       </div>

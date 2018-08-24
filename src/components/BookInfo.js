@@ -3,12 +3,13 @@
  */
 import React, { Component } from 'react'
 import * as BooksAPI from '../utils/BooksAPI'
-import { Link } from 'react-router-dom'
+import Loading from './Loading'
 
 class BookInfo extends Component {
 
   state = {
-    book: {}
+    book: {},
+    showLoading: true
   }
 
   componentDidMount() {
@@ -16,17 +17,19 @@ class BookInfo extends Component {
     BooksAPI.get(bookId)
       .then((book) => {
         console.dir(book)
-        this.setState({ book })
+        this.setState({ book, showLoading: false })
       })
   }
 
   render() {
-    const { book } = this.state;
+    const { book, showLoading } = this.state
+    const { history } = this.props
+
 
     return (
       <div>
         <div className="book-info-header">
-          <Link className="close-search" to="/">Close</Link>
+          <button className="go-back" onClick={history.goBack}>Close</button>
           <h1>{book.title}</h1>
         </div>
         <div className="container-book">
@@ -37,6 +40,8 @@ class BookInfo extends Component {
             AQUI VAI A Info
           </div>
         </div>
+
+        <Loading show={showLoading} />
       </div>
     )
   }

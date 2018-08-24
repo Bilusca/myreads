@@ -93,7 +93,8 @@ body, .app {
   outline: none;
 }
 
-.close-search {
+.close-search,
+.go-back {
   display: block;
   top: 20px;
   left: 15px;
@@ -105,6 +106,8 @@ body, .app {
   background-repeat: no-repeat;
   background-size: 28px;
   font-size: 0;
+  border: 0;
+  cursor: pointer;
 }
 
 .search-books-results {
