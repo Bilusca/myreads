@@ -22,7 +22,7 @@ const Book = ({ book, shelf, onShelfUpdate }) => {
           <div className="book-top">
             {bookImage}
             <div className="book-shelf-changer">
-              <select onChange={(ev) => onShelfUpdate(book, ev.target.value)} defaultValue="move">
+              <select onChange={(ev) => onShelfUpdate(book, ev.target.value)} defaultValue={book.shelf || "none"}>
                 <option value="move" disabled>Move to...</option>
                 {shelf.map((s) => <option key={s.id} value={s.id}>{s.value}</option>)}
               </select>

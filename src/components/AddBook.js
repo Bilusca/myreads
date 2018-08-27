@@ -24,7 +24,13 @@ class AddBook extends Component {
   }
 
   updateQuery = _.debounce((query) => {
-    if (!query) return
+    if (!query) {
+      return this.setState({
+        query: '',
+        books: [],
+        message: 'Please, search a book.'
+      })
+    }
 
     this.showLoading(true)
     this.setState({ query })
@@ -33,11 +39,12 @@ class AddBook extends Component {
         this.setState({ books: books.items, message: 'No matchs found.' })
         this.showLoading(false)
       } else {
+        books.map(book => (this.props.booksOnShelf.filter((b) => b.id === book.id).map(b => book.shelf = b.shelf)))
         this.setState({ books, message: 'Please, search a book.' })
         this.showLoading(false)
       }
     })
-  }, 500)
+  }, 700)
 
   render() {
     const { shelf, onShelfUpdate } = this.props
@@ -73,7 +80,8 @@ class AddBook extends Component {
 
 AddBook.protoTypes = {
   shelf: PropTypes.array.isRequired,
-  onShelfUpdate: PropTypes.func.isRequired
+  onShelfUpdate: PropTypes.func.isRequired,
+  booksOnShelf: PropTypes.array.isRequired
 }
 
 export default AddBook;

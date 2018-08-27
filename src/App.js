@@ -12,7 +12,7 @@ class App extends Component {
   state = {
     books: [],
     shelf: [
-      {id: 'currentlyReading', value: 'Currently reading'},
+      {id: 'currentlyReading', value: 'Currently Reading'},
       {id: 'wantToRead', value: 'Want to Read'},
       {id: 'read', value: 'Read'},
       {id: 'none', value: 'None'}
@@ -67,7 +67,7 @@ class App extends Component {
             <BooksShelf books={books} onShelfUpdate={this.onShelfUpdate} shelf={shelf}/>
           )} />
           <Route path="/add" render={() => (
-            <AddBook shelf={shelf} showLoading={this.showLoading} onShelfUpdate={(book, shelf) => this.onShelfUpdate(book, shelf) } />
+            <AddBook shelf={shelf} booksOnShelf={books} showLoading={this.showLoading} onShelfUpdate={(book, shelf) => this.onShelfUpdate(book, shelf) } />
           )} />
 
           <Loading show={show} />
