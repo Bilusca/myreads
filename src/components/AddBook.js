@@ -36,12 +36,10 @@ class AddBook extends Component {
     this.setState({ query })
     BooksAPI.search(this.state.query).then( (books) => {
       if (books.hasOwnProperty('error')) {
-        this.setState({ books: books.items, message: 'No matchs found.' })
-        this.showLoading(false)
+        this.setState({ books: books.items, message: 'No matchs found.', showLoading: false })
       } else {
         books.map(book => (this.props.booksOnShelf.filter((b) => b.id === book.id).map(b => book.shelf = b.shelf)))
-        this.setState({ books, message: 'Please, search a book.' })
-        this.showLoading(false)
+        this.setState({ books, message: 'Please, search a book.', showLoading: false })
       }
     })
   }, 700)
