@@ -1,7 +1,8 @@
-import React, { Component } from 'react';
-import Book from './Book';
-import * as _ from 'lodash';
-import { Link } from 'react-router-dom';
+import React, { Component } from 'react'
+import Book from './Book'
+import * as _ from 'lodash'
+import { Link } from 'react-router-dom'
+import PropTypes from 'prop-types'
 
 class BooksShelf extends Component {
 
@@ -77,6 +78,12 @@ class BooksShelf extends Component {
       </div>
     )
   }
+}
+
+BooksShelf.propTypes = {
+  books: PropTypes.array.isRequired,
+  shelf: PropTypes.array.isRequired,
+  onShelfUpdate: PropTypes.func.isRequired,
 }
 
 export default BooksShelf;

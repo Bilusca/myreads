@@ -2,12 +2,11 @@ import React, { Component } from "react"
 import { Route } from 'react-router-dom'
 import * as _ from 'lodash'
 import swal from 'sweetalert'
-import * as BooksAPI from "./utils/BooksAPI"
+import * as BooksAPI from './utils/BooksAPI'
 import BooksShelf from './components/BooksShelf'
 import AddBook from './components/AddBook'
-import BookInfo from "./components/BookInfo"
-import Loading from "./components/Loading"
-import "./App.css"
+import Loading from './components/Loading'
+import './App.css'
 
 class App extends Component {
   state = {
@@ -45,7 +44,7 @@ class App extends Component {
       return swal('Oh no!','This book is already in Shelf!', 'warning')
     }
 
-    BooksAPI.update(book, shelf).then((response) => {
+    BooksAPI.update(book, shelf).then(() => {
       book.shelf = shelf
       this.setState((state) => ({
         books: state.books.filter((b) => b.id !== book.id).concat([book]),
@@ -70,7 +69,6 @@ class App extends Component {
           <Route path="/add" render={() => (
             <AddBook shelf={shelf} showLoading={this.showLoading} onShelfUpdate={(book, shelf) => this.onShelfUpdate(book, shelf) } />
           )} />
-          <Route path="/book/:id" render={({ match, history }) => (<BookInfo history={history} bookId={match.params.id} />)}/>
 
           <Loading show={show} />
       </div>

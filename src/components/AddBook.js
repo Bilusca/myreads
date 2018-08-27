@@ -1,9 +1,10 @@
-import React, { Component } from 'react';
-import * as BooksAPI from '../utils/BooksAPI';
-import * as _ from 'lodash';
-import { Link } from 'react-router-dom';
+import React, { Component } from 'react'
+import * as BooksAPI from '../utils/BooksAPI'
+import * as _ from 'lodash'
+import { Link } from 'react-router-dom'
+import PropTypes from 'prop-types'
 
-import Book from './Book';
+import Book from './Book'
 import Loading from './Loading'
 
 class AddBook extends Component {
@@ -68,6 +69,11 @@ class AddBook extends Component {
       </div>
     )
   }
+}
+
+AddBook.protoTypes = {
+  shelf: PropTypes.array.isRequired,
+  onShelfUpdate: PropTypes.func.isRequired
 }
 
 export default AddBook;

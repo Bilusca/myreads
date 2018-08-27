@@ -1,21 +1,17 @@
 import React from 'react'
 import BookCover from './BookCover'
-import { Link } from 'react-router-dom'
+import PropTypes from 'prop-types'
 
 
 const Book = ({ book, shelf, onShelfUpdate }) => {
   let bookImage;
   if(book.hasOwnProperty('imageLinks')) {
     bookImage = (
-      <Link to={`/book/${book.id}`}>
-        <BookCover bookId={book.id} image={book.imageLinks.smallThumbnail} />
-      </Link>
+      <BookCover bookId={book.id} image={book.imageLinks.smallThumbnail} />
     )
   } else {
     bookImage = (
-      <Link to={`/book/${book.id}`}>
-        <BookCover bookId={book.id} image="img/no-image-available.jpg" />
-      </Link>
+      <BookCover bookId={book.id} image="img/no-image-available.jpg" />
     )
   }
 
@@ -36,6 +32,12 @@ const Book = ({ book, shelf, onShelfUpdate }) => {
         </div>
     </li>
   );
+}
+
+Book.protoTypes = {
+  book: PropTypes.object.isRequired,
+  shelf: PropTypes.array.isRequired,
+  onShelfUpdate: PropTypes.func.isRequired
 }
 
 export default Book;

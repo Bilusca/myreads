@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 const Loading = ({ show }) => {
   const styles = {
@@ -19,6 +20,10 @@ const Loading = ({ show }) => {
       <img src="img/loading.gif" alt="Loading GIF" />
     </div>
   )
+}
+
+Loading.propTypes = {
+  show: PropTypes.bool.isRequired
 }
 
 export default Loading
