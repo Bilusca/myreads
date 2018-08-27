@@ -1,6 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
+import loadingGif from '../img/loading.gif'
+
 const Loading = ({ show }) => {
   const styles = {
     backgroundColor: 'rgba(255, 255, 255, 0.8)',
@@ -17,7 +19,7 @@ const Loading = ({ show }) => {
 
   return (
     <div style={styles}>
-      <img src="img/loading.gif" alt="Loading GIF" />
+      <img src={loadingGif} alt="Loading GIF" />
     </div>
   )
 }

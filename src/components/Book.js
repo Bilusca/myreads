@@ -1,6 +1,7 @@
 import React from 'react'
 import BookCover from './BookCover'
 import PropTypes from 'prop-types'
+import noImageFound from '../img/no-image-available.jpg'
 
 
 const Book = ({ book, shelf, onShelfUpdate }) => {
@@ -11,7 +12,7 @@ const Book = ({ book, shelf, onShelfUpdate }) => {
     )
   } else {
     bookImage = (
-      <BookCover bookId={book.id} image="img/no-image-available.jpg" />
+      <BookCover bookId={book.id} image={noImageFound} />
     )
   }
 
